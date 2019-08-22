@@ -1,0 +1,176 @@
+******************************************************************************
+                  TI ARM Linker PC v18.1.2                     
+******************************************************************************
+>> Linked Thu Aug 22 22:12:35 2019
+
+OUTPUT FILE NAME:   <Tiva_PWM.out>
+ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00000695
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  FLASH                 00000000   00040000  0000082e  0003f7d2  R  X
+  SRAM                  20000000   00008000  00000200  00007e00  RW X
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    00000830   00000830    r-x
+  00000000    00000000    0000026c   0000026c    r-- .intvecs
+  0000026c    0000026c    00000532   00000532    r-x .text
+  000007a0    000007a0    00000090   00000090    r-- .const
+20000000    20000000    00000200   00000000    rw-
+  20000000    20000000    00000200   00000000    rw- .stack
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.intvecs   0    00000000    0000026c     
+                  00000000    0000026c     tm4c123gh6pm_startup_ccs.obj (.intvecs)
+
+.text      0    0000026c    00000532     
+                  0000026c    00000184     main.obj (.text)
+                  000003f0    00000132     driverlib.lib : gpio.obj (.text:GPIOPadConfigSet)
+                  00000522    00000002     --HOLE-- [fill = 0]
+                  00000524    000000f4                   : sysctl.obj (.text:SysCtlClockSet)
+                  00000618    00000048                   : gpio.obj (.text:GPIOPinConfigure)
+                  00000660    00000034                   : sysctl.obj (.text:SysCtlPeripheralEnable)
+                  00000694    00000030     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.text:_c_int00_noinit_noargs:_c_int00_noinit_noargs)
+                  000006c4    0000002a     driverlib.lib : gpio.obj (.text:GPIODirModeSet)
+                  000006ee    00000022                   : pwm.obj (.text:PWMGenConfigure)
+                  00000710    0000001e                   : pwm.obj (.text:PWMPulseWidthSet)
+                  0000072e    00000002     --HOLE-- [fill = 0]
+                  00000730    00000014                   : pwm.obj (.text:PWMClockSet)
+                  00000744    00000012                   : gpio.obj (.text:GPIOPinTypePWM)
+                  00000756    00000012                   : pwm.obj (.text:PWMOutputState)
+                  00000768    00000010                   : pwm.obj (.text:PWMGenPeriodSet)
+                  00000778    0000000c                   : pwm.obj (.text:PWMGenEnable)
+                  00000784    0000000c     tm4c123gh6pm_startup_ccs.obj (.text)
+                  00000790    00000006     driverlib.lib : sysctl.obj (.text:SysCtlDelay)
+                  00000796    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  0000079a    00000004                                   : exit.c.obj (.text:abort:abort)
+
+.const     0    000007a0    00000090     
+                  000007a0    00000090     driverlib.lib : gpio.obj (.const:g_pui32GPIOBaseAddrs)
+
+.cinit     0    00000000    00000000     UNINITIALIZED
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+.stack     0    20000000    00000200     UNINITIALIZED
+                  20000000    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.stack)
+                  20000004    000001fc     --HOLE--
+
+MODULE SUMMARY
+
+       Module                         code   ro data   rw data
+       ------                         ----   -------   -------
+    .\
+       tm4c123gh6pm_startup_ccs.obj   12     620       0      
+       main.obj                       388    0         0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         400    620       0      
+                                                              
+    C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ccs/Debug/driverlib.lib
+       gpio.obj                       438    144       0      
+       sysctl.obj                     302    0         0      
+       pwm.obj                        130    0         0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         870    144       0      
+                                                              
+    C:\ti\ccsv8\tools\compiler\ti-cgt-arm_18.1.2.LTS\lib\rtsv7M4_T_le_v4SPD16_eabi.lib
+       boot_cortex_m.c.obj            48     0         0      
+       exit.c.obj                     4      0         0      
+       pre_init.c.obj                 4      0         0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         56     0         0      
+                                                              
+       Stack:                         0      0         512    
+    +--+------------------------------+------+---------+---------+
+       Grand Total:                   1326   764       512    
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                  
+-------   ----                  
+0000079b  C$$EXIT               
+000006c5  GPIODirModeSet        
+000003f1  GPIOPadConfigSet      
+00000619  GPIOPinConfigure      
+00000745  GPIOPinTypePWM        
+00000731  PWMClockSet           
+000006ef  PWMGenConfigure       
+00000779  PWMGenEnable          
+00000769  PWMGenPeriodSet       
+00000757  PWMOutputState        
+00000711  PWMPulseWidthSet      
+00000785  ResetISR              
+00000525  SysCtlClockSet        
+00000791  SysCtlDelay           
+00000661  SysCtlPeripheralEnable
+20000200  __STACK_END           
+00000200  __STACK_SIZE          
+20000200  __STACK_TOP           
+ffffffff  __TI_pprof_out_hndl   
+ffffffff  __TI_prof_data_size   
+ffffffff  __TI_prof_data_start  
+00000000  __TI_static_base__    
+ffffffff  __binit__             
+ffffffff  __c_args__            
+UNDEFED   __mpu_init            
+20000000  __stack               
+00000695  _c_int00_noinit_noargs
+00000797  _system_pre_init      
+0000079b  abort                 
+ffffffff  binit                 
+00000000  g_pfnVectors          
+0000026d  main                  
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                  
+-------   ----                  
+00000000  __TI_static_base__    
+00000000  g_pfnVectors          
+00000200  __STACK_SIZE          
+0000026d  main                  
+000003f1  GPIOPadConfigSet      
+00000525  SysCtlClockSet        
+00000619  GPIOPinConfigure      
+00000661  SysCtlPeripheralEnable
+00000695  _c_int00_noinit_noargs
+000006c5  GPIODirModeSet        
+000006ef  PWMGenConfigure       
+00000711  PWMPulseWidthSet      
+00000731  PWMClockSet           
+00000745  GPIOPinTypePWM        
+00000757  PWMOutputState        
+00000769  PWMGenPeriodSet       
+00000779  PWMGenEnable          
+00000785  ResetISR              
+00000791  SysCtlDelay           
+00000797  _system_pre_init      
+0000079b  C$$EXIT               
+0000079b  abort                 
+20000000  __stack               
+20000200  __STACK_END           
+20000200  __STACK_TOP           
+ffffffff  __TI_pprof_out_hndl   
+ffffffff  __TI_prof_data_size   
+ffffffff  __TI_prof_data_start  
+ffffffff  __binit__             
+ffffffff  __c_args__            
+ffffffff  binit                 
+UNDEFED   __mpu_init            
+
+[32 symbols]
