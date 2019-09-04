@@ -68,6 +68,51 @@ void I2C0_Master_Init(void)
 
 }
 
+//read multiple bytes specified register on slave device
+uint32_t I2CReceiveMultipleBytes(uint32_t slave_addr, uint8_t reg, uint8_t size, uint8_t *DataGet)
+{
+    int index = 0;
+
+    //specify that we are writing (a register address) to the
+    //slave device
+    I2CMasterSlaveAddrSet(I2C0_BASE, slave_addr, false);
+
+    //specify register to be read
+    I2CMasterDataPut(I2C0_BASE, reg);
+
+    //send control byte and register address byte to slave device
+    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_SEND_START);
+
+    //wait for MCU to finish transaction
+    while(I2CMasterBusy(I2C0_BASE));
+
+    //specify that we are going to read from slave device
+    I2CMasterSlaveAddrSet(I2C0_BASE, slave_addr, true);
+
+//  the first byte receive
+    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_RECEIVE_START);
+    //wait for MCU to finish transaction
+    while(I2CMasterBusy(I2C0_BASE));
+    //return data pulled from the specified register
+    *(DataGet + 0) = I2CMasterDataGet(I2C0_BASE);
+
+    if (size >= 2)
+    {
+        for(index = 1; index < size - 1; index ++)
+        {
+            I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_RECEIVE_CONT);
+            while(I2CMasterBusy(I2C0_BASE));
+            *(DataGet + index) = I2CMasterDataGet(I2C0_BASE);
+        }
+    //    Get the last byte
+        I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_RECEIVE_FINISH);
+        while(I2CMasterBusy(I2C0_BASE));
+        *(DataGet + size -1) = I2CMasterDataGet(I2C0_BASE);
+
+    }
+    return 0;
+}
+
 int main()
 {
     uint8_t ui32DataTx;
