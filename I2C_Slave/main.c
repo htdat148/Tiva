@@ -138,7 +138,8 @@ void readDataRegister(uint8_t registerAdd, uit8_t numberOfData)
 
 //    send data to MASTER
 //    TODO: add number o
-    I2CSend(MASTER_ADDRESS, numberofData, ...)
+    I2CSend(MASTER_ADDRESS, numberofData, ...);
+	free(ptr);
 
 }
 
