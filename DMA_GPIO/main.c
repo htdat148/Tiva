@@ -66,10 +66,10 @@ void InituDMA()
   uDMAControlBaseSet(DMAcontroltable);
 
   //Set the channel trigger to be SOFTWARE
-  uDMAChannelAssign(UDMA_CHANNEL_SW);
+  uDMAChannelAssign(UDMA_CH30_SW);
 
   //Disable all the atributes in case any was set
-  uDMAChannelAttributeDisable(UDMA_CHANNEL_SW,
+  uDMAChannelAttributeDisable(UDMA_CH30_SW,
   UDMA_ATTR_ALTSELECT | UDMA_ATTR_USEBURST |
     UDMA_ATTR_HIGH_PRIORITY |
     UDMA_ATTR_REQMASK);
@@ -79,22 +79,22 @@ void InituDMA()
  * x: 1,2,4,8,32,128,1024
  */
 
-  uDMAChannelControlSet(UDMA_CHANNEL_SW | UDMA_PRI_SELECT,
+  uDMAChannelControlSet(UDMA_CH30_SW | UDMA_PRI_SELECT,
   UDMA_SIZE_32 | UDMA_SRC_INC_32 | UDMA_DST_INC_32 |
-    UDMA_ARB_1);
+    UDMA_ARB_128);
 
   /*
     UDMA_MODE_BASIC: the number of transfer follow the Arbitration size
     if you have 128 elements in buffer and set UDMA_ARB_32, DMA ONLY does 32 transfer
     UDMA_MODE_AUTO: transfer all elements means the SIZE
   */
-  uDMAChannelTransferSet(UDMA_CHANNEL_SW | UDMA_PRI_SELECT,
-                         UDMA_MODE_AUTO,
+  uDMAChannelTransferSet(UDMA_CH30_SW | UDMA_PRI_SELECT,
+                         UDMA_MODE_BASIC,
                          SrcBuf, DestBuf,
                          SIZE);
 
   //Enable the DMA chanel
-  uDMAChannelEnable(UDMA_CHANNEL_SW);
+  uDMAChannelEnable(UDMA_CH30_SW);
 
 }
 
@@ -117,7 +117,7 @@ void main()
   }
 
 /*  request a DMA transfer*/
-  uDMAChannelRequest(UDMA_CHANNEL_SW);
+  uDMAChannelRequest(UDMA_CH30_SW);
   while(1)
   {
 
